@@ -4,21 +4,24 @@ phases:
   install:
     runtime-versions:
       nodejs: 18
-   
     commands:
-        # install npm
-        - npm install
-       
+      - echo Installing dependencies...
+      - npm install
+      
   build:
     commands:
-        # run build script
-        - npm run build
-     
+      - echo Running build script...
+      - npm run build
+
 artifacts:
-  # include all files required to run the application
   files:
     - public/**/*
     - src/**/*
     - package.json
     - appspec.yml
     - scripts/**/*
+
+# Optional: Add environment variables or other configuration settings here
+env:
+  variables:
+    ENV_VAR_NAME: "value"
