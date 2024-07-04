@@ -1,17 +1,24 @@
-version: 0.0
-os: linux
-files:
-  - source: /index.html
-    destination: /var/www/html/
-hooks:
-  BeforeInstall:
-    - location: scripts/install_dependencies
-      timeout: 300
-      runas: root
-    - location: scripts/start_server
-      timeout: 300
-      runas: root
-  ApplicationStop:
-    - location: scripts/stop_server
-      timeout: 300
-      runas: root
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      nodejs: 18
+   
+    commands:
+        # install npm
+        - npm install
+       
+  build:
+    commands:
+        # run build script
+        - npm run build
+     
+artifacts:
+  # include all files required to run the application
+  files:
+    - public/**/*
+    - src/**/*
+    - package.json
+    - appspec.yml
+    - scripts/**/*
